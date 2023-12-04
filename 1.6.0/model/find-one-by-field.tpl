@@ -16,7 +16,7 @@ func (m *default{{.upperStartCamelObject}}Model) FindOneBy{{.upperField}}(ctx co
 	default:
 		return nil, err
 	}
-}{{else}}var resp {{.upperStartCamelObject}}
+{{else}}var resp {{.upperStartCamelObject}}
 	err := m.conn.WithContext(ctx).Model(&{{.upperStartCamelObject}}{}).Where("{{.originalField}}", {{.lowerStartCamelField}}).Take(&resp).Error
 	switch err {
 	case nil:
@@ -26,4 +26,4 @@ func (m *default{{.upperStartCamelObject}}Model) FindOneBy{{.upperField}}(ctx co
 	default:
 		return nil, err
 	}
-}{{end}}
+{{end}}}
