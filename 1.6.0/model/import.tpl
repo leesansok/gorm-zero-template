@@ -1,6 +1,7 @@
 import (
 	"context"
 	"fmt"
+	"github.com/duke-git/lancet/v2/strutil"
 	{{if .time}}"time"{{end}}
 	"database/sql"
 
