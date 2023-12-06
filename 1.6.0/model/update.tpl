@@ -53,7 +53,7 @@ func (m *default{{.upperStartCamelObject}}Model) FindAll(ctx context.Context, or
         if strutil.IsBlank(query) {
             return conn.Model(&{{.upperStartCamelObject}}{}).Find(&resp).Error
         }
-    	return conn.Model(&{{.upperStartCamelObject}}{}).Where(query).Find(&resp).Error
+    	return conn.Model(&{{.upperStartCamelObject}}{}).Where(query, args...).Find(&resp).Error
     })
 	switch err {
 	case nil:
