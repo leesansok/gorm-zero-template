@@ -1,5 +1,6 @@
 
 func (m *default{{.upperStartCamelObject}}Model) Insert(ctx context.Context, tx *gorm.DB, data *{{.upperStartCamelObject}}) error {
+	data.Id = uniqueId.GenSnowFlakeId()
 	{{if .withCache}}
     err := m.ExecCtx(ctx, func(conn *gorm.DB) error {
 		db := conn

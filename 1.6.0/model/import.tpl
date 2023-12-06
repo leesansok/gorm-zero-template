@@ -4,6 +4,7 @@ import (
 	"github.com/duke-git/lancet/v2/strutil"
 	{{if .time}}"time"{{end}}
 	"database/sql"
+	"sg-go/common/uniqueId"
 
 	"github.com/SpectatorNan/gorm-zero/gormc"
 	"github.com/zeromicro/go-zero/core/stores/cache"
