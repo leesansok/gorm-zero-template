@@ -1,5 +1,6 @@
 import (
 	"context"
+	{{if .containsDbSql}}"database/sql"{{end}}
 	"fmt"
 	"github.com/duke-git/lancet/v2/strutil"
 	{{if .time}}"time"{{end}}
