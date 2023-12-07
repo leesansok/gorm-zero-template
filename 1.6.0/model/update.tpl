@@ -9,12 +9,12 @@ func (m *default{{.upperStartCamelObject}}Model) Update(ctx context.Context, tx 
         if tx != nil {
             db = tx
         }
-        return db.Where("id = ?", id).Updates(columns).Error
+        return db.Save(data).Error
     }, m.getCacheKeys(old)...){{else}}db := m.conn
         if tx != nil {
             db = tx
         }
-        err:= db.WithContext(ctx).Where("id = ?", id).Updates(columns).Error{{end}}
+        err:= db.WithContext(ctx).Save(data).Error{{end}}
     return err
 }
 
@@ -28,12 +28,12 @@ func (m *default{{.upperStartCamelObject}}Model) UpdateColumns(ctx context.Conte
         if tx != nil {
             db = tx
         }
-        return db.Save(data).Error
+        return db.Where("id = ?", id).Updates(columns).Error
     }, m.getCacheKeys(old)...){{else}}db := m.conn
         if tx != nil {
             db = tx
         }
-        err:= db.WithContext(ctx).Save(data).Error{{end}}
+        err:= db.WithContext(ctx).Where("id = ?", id).Updates(columns).Error{{end}}
     return err
 }
 
