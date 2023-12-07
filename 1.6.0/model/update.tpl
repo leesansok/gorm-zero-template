@@ -9,6 +9,25 @@ func (m *default{{.upperStartCamelObject}}Model) Update(ctx context.Context, tx 
         if tx != nil {
             db = tx
         }
+        return db.Where("id = ?", id).Updates(columns).Error
+    }, m.getCacheKeys(old)...){{else}}db := m.conn
+        if tx != nil {
+            db = tx
+        }
+        err:= db.WithContext(ctx).Where("id = ?", id).Updates(columns).Error{{end}}
+    return err
+}
+
+func (m *default{{.upperStartCamelObject}}Model) UpdateColumns(ctx context.Context, tx *gorm.DB, columns map[string]interface{}, id int64) error {
+    {{if .withCache}}old, err := m.FindOne(ctx, id)
+    if err != nil && err != ErrNotFound {
+        return err
+    }
+    err = m.ExecCtx(ctx, func(conn *gorm.DB) error {
+        db := conn
+        if tx != nil {
+            db = tx
+        }
         return db.Save(data).Error
     }, m.getCacheKeys(old)...){{else}}db := m.conn
         if tx != nil {
@@ -17,6 +36,7 @@ func (m *default{{.upperStartCamelObject}}Model) Update(ctx context.Context, tx 
         err:= db.WithContext(ctx).Save(data).Error{{end}}
     return err
 }
+
 {{if .withCache}}
 func (m *default{{.upperStartCamelObject}}Model) getCacheKeys(data *{{.upperStartCamelObject}}) []string {
     if data == nil {
