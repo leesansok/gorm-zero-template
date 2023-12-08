@@ -28,7 +28,7 @@ func (m *default{{.upperStartCamelObject}}Model) UpdateColumns(ctx context.Conte
         if tx != nil {
             db = tx
         }
-        return db.Where("id = ?", id).Updates(columns).Error
+        return db.Model(&{{.upperStartCamelObject}}{}).Where("id = ?", id).Updates(columns).Error
     }, m.getCacheKeys(old)...){{else}}db := m.conn
         if tx != nil {
             db = tx
