@@ -12,6 +12,6 @@ func (m *default{{.upperStartCamelObject}}Model) Insert(ctx context.Context, tx 
         if tx != nil {
             db = tx
         }
-        err:= db.WithContext(ctx).Create(&data).Error{{end}}
+        err:= db.WithContext(ctx).Update(&data).Error{{end}}
 	return err
 }
